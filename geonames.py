@@ -2,9 +2,9 @@ import sys
 import urllib
 import urllib2
 try:
-    import simplejson as json
+    from simplejson import loads as json_parse
 except ImportError:
-    import json
+    from json import read as json_parse
 
 DOMAIN = 'http://api.geonames.org/'
 USERNAME = '' #enter your geonames username here
@@ -27,7 +27,7 @@ def fetchJson(method, dparams):
     if DEBUG:
         print uri
     resource = urllib2.urlopen(uri).readlines()
-    js = json.loads(resource[0])
+    js = json_parse(resource[0])
     if DEBUG:
         print js
     return js
