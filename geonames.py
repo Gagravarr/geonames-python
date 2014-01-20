@@ -1,7 +1,11 @@
 import sys
 import urllib
 import urllib2
-import simplejson as json
+try:
+    import simplejson as json
+except ImportError:
+    import json
+
 DOMAIN = 'http://api.geonames.org/'
 USERNAME = '' #enter your geonames username here
 
