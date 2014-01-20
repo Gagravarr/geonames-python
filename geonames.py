@@ -52,6 +52,8 @@ def children(geonameId, **kwargs):
 
     if('geonames' in results):
         return results['geonames']
+    elif('status' in results and 'message' in results['status']):
+        raise IOError(results['status']['message'])
     else:
         return None
 
@@ -66,6 +68,8 @@ def search(**kwargs):
 
     if('geonames' in results):
         return results['geonames']
+    elif('status' in results and 'message' in results['status']):
+        raise IOError(results['status']['message'])
     else:
         return None
 
@@ -80,6 +84,8 @@ def postalCodeSearch(**kwargs):
 
     if('postalCodes' in results):
         return results['postalCodes']
+    elif('status' in results and 'message' in results['status']):
+        raise IOError(results['status']['message'])
     else:
         return None
 
@@ -94,6 +100,8 @@ def findNearbyPostalCodes(**kwargs):
 
     if('postalCodes' in results):
         return results['postalCodes']
+    elif('status' in results and 'message' in results['status']):
+        raise IOError(results['status']['message'])
     else:
         return None
 
@@ -108,5 +116,7 @@ def hierarchy(geonameId, **kwargs):
 
     if('geonames' in results):
         return results['geonames']
+    elif('status' in results and 'message' in results['status']):
+        raise IOError(results['status']['message'])
     else:
         return None
