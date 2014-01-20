@@ -10,7 +10,19 @@ DOMAIN = 'http://api.geonames.org/'
 USERNAME = '' #enter your geonames username here
 DEBUG = 0
 
-def fetchJson(method, params):
+def fetchJson(method, dparams):
+    # GeoNames supports the same arguments multiple times, eg 
+    #  featureClass=["P","T"] -> featureClass=P&featureClass=T
+    # We need to switch from a dict to array so that urllib will send that
+    params = []
+    for key, value in dparams.items():
+         # One or many values?
+         if isinstance(value, basestring) or isinstance(value, int):
+             params.append((key,value))
+         else:
+             for v in value:
+                 params.append((key,v))
+
     uri = DOMAIN + '%s?%s&username=%s' % (method, urllib.urlencode(params), USERNAME)
     if DEBUG:
         print uri
