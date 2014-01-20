@@ -8,11 +8,16 @@ except ImportError:
 
 DOMAIN = 'http://api.geonames.org/'
 USERNAME = '' #enter your geonames username here
+DEBUG = 0
 
 def fetchJson(method, params):
     uri = DOMAIN + '%s?%s&username=%s' % (method, urllib.urlencode(params), USERNAME)
+    if DEBUG:
+        print uri
     resource = urllib2.urlopen(uri).readlines()
     js = json.loads(resource[0])
+    if DEBUG:
+        print js
     return js
 
 def get(geonameId, **kwargs):
