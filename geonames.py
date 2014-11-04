@@ -22,7 +22,12 @@ def fetchJson(method, dparams):
          else:
              for v in value:
                  params.append((key,v))
-
+    # urllib doesn't like unicode strings, so change those to utf8
+    for i in range(len(params)):
+        kv = params[i]
+        if isinstance(kv[1], unicode):
+           params[i] = (kv[0], kv[1].encode('utf-8'))
+    # Build the url
     uri = DOMAIN + '%s?%s&username=%s' % (method, urllib.urlencode(params), USERNAME)
     if DEBUG:
         print uri
